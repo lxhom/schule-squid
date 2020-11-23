@@ -6,8 +6,8 @@
 class Widget : public QWidget {
     Q_OBJECT
 
-public:
-    Widget(QWidget *parent = nullptr);
-    ~Widget();
+    public:
+        Widget(QWidget *parent = nullptr);
+        ~Widget();
 };
 #endif // WIDGET_H
