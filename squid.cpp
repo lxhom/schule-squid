@@ -1,7 +1,7 @@
 #include "squid.h"
 #include "bled.h"
 
-Squid::Squid(QWidget *parent=0) {
+Squid::Squid(QWidget *parent) {
 
     this->speed[0] = rand()%10+1;
     this->speed[1] = rand()%10+1;
@@ -21,6 +21,9 @@ Squid::Squid(QWidget *parent=0) {
     this->color[0] = rand()%200+25;
     this->color[1] = rand()%200+25;
     this->color[2] = rand()%200+25;
+
+    this->led = new BLed(parent);
+    this->led->show();
 
 
 }
