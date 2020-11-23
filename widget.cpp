@@ -1,7 +1,10 @@
 #include "widget.h"
 
 Widget::Widget(QWidget *parent) : QWidget(parent) {
-    test = new Squid(this);
+    this->resize(500,500);
+    for (int i=0; i<10; i++) {
+        new Squid(this);
+    }
 }
 
 Widget::~Widget() {

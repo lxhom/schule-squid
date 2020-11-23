@@ -23,6 +23,7 @@ Squid::Squid(QWidget *parent) {
     this->color[2] = rand()%200+25;
 
     this->led = new BLed(parent);
+    this->led->setGeometry(this->position[0],this->position[1],this->squidSize,this->squidSize);
     this->led->show();
 
 
