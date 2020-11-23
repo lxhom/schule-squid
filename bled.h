@@ -1,9 +1,9 @@
 /* This file is part of the KDE libraries
-
+   // typo fixed by lxhhh
    //-----------------------------------------------//
    // modified from ufg@hosengummi.de               //
    // for BabyDevelop                               //
-   // powerfull modified for BabyDevelop 6 from ufg //
+   // powerful modified for BabyDevelop 6 from ufg  //
    // http://babydevelop.sourceforge.net            //
    //-----------------------------------------------//
 
