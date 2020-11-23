@@ -1,3 +1,5 @@
+#include "bled.h"
+
 class Squid {
 private:
     // the movement, pos and so on

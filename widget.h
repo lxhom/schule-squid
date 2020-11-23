@@ -5,6 +5,7 @@
 
 #include "bled.h"
 #include "bild.h"
+#include "squid.h"
 
 class Widget : public QWidget {
     Q_OBJECT
