@@ -10,6 +10,8 @@ private:
     int direction[2];
     int position[2];
     int color[3];
+    BLed* led;
+    void update();
 
 public:
     // constructor, deconstructor
@@ -17,7 +19,6 @@ public:
     Squid(QWidget *parent=0);
     ~Squid();
 
-    BLed* led;
 
 };
 
