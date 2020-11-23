@@ -1,5 +1,6 @@
 #include "squid.h"
 #include "bled.h"
+#include <QColor>
 
 Squid::Squid(QWidget *parent) {
 
@@ -9,7 +10,7 @@ Squid::Squid(QWidget *parent) {
     this->windowSize[0] = parent->width();
     this->windowSize[1] = parent->height();
 
-    this->squidSize = rand()%15+5;
+    this->squidSize = rand()%30+20;
 
     // r%2 : 0 / 1 | r%2*2 : 0 / 2 | r%2*2-1 : -1 / 1 
     this->direction[0] = rand()%2*2-1;
@@ -24,6 +25,7 @@ Squid::Squid(QWidget *parent) {
 
     this->led = new BLed(parent);
     this->led->setGeometry(this->position[0],this->position[1],this->squidSize,this->squidSize);
+    this->led->setColor(QColor(this->color[0], this->color[1], this->color[2]));
     this->led->show();
 
 
