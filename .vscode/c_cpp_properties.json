@@ -5,7 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "Q:\\t\\5.12.9\\mingw73_32\\include\\**",
-                "Q:\\t\\Tools\\mingw730_32\\include\\**"
+                "Q:\\t\\Tools\\mingw730_32\\include\\**",
+                "/usr/include/x86_64-linux-gnu/qt5/**"
             ],
             "defines": [
                 "_DEBUG",
