@@ -8,7 +8,7 @@ private:
     int r = 0; int g = 1; int b = 2; 
     int speed[2];
     int windowSize[2];
-    int squidSize;
+    int squidSize[2];
     int direction[2];
     int position[2];
     int color[3];
