@@ -11,11 +11,10 @@ private:
     int position[2];
     int color[3];
     BLed* led;
-    void update();
 
 public:
-    // constructor, deconstructor
-    // hi
+
+    void update();
     Squid(QWidget *parent=0);
     ~Squid();
 
