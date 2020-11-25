@@ -13,7 +13,7 @@ class Widget : public QWidget {
 public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
-    Squid* test;
+    Squid* squids[1000];
 };
 
 #endif // WIDGET_H
