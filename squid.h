@@ -15,12 +15,9 @@ private:
     BLed* led;
 
 public:
-
     void update();
     Squid(QWidget *parent=0);
     ~Squid();
-
-
 };
 
 
