@@ -5,8 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "Q:\\t\\5.12.9\\mingw73_32\\include\\**",
-                "Q:\\t\\Tools\\mingw730_32\\include\\**",
-                "/usr/include/x86_64-linux-gnu/qt5/**"
+                "Q:\\t\\Tools\\mingw730_32\\include\\**"
             ],
             "defines": [
                 "_DEBUG",
@@ -17,6 +16,26 @@
             "cStandard": "c11",
             "cppStandard": "c++14",
             "intelliSenseMode": "gcc-x86"
+        },
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/include/x86_64-linux-gnu/qt5/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c11",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "gcc-x64",
+            "compilerArgs": [],
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/**",
+                    "/usr/include/x86_64-linux-gnu/qt5/"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
         }
     ],
     "version": 4
