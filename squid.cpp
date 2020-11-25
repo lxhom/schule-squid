@@ -4,8 +4,8 @@
 
 Squid::Squid(QWidget *parent) {
 
-    speed[x] = rand()%10+1;
-    speed[y] = rand()%10+1;
+    speed[x] = rand()%2+1;
+    speed[y] = rand()%2+1;
 
     windowSize[x] = parent->width();
     windowSize[y] = parent->height();
@@ -31,8 +31,26 @@ Squid::Squid(QWidget *parent) {
 }
 
 void Squid::update() {
-    position[x] += direction[x] * speed[x];
-    position[y] += direction[y] * speed[y];
+    position[x] += direction[x] * speed[x] * 0.1;
+    position[y] += direction[y] * speed[y] * 0.1;
+
+    if (position[x] > windowSize[x] - squidSize[x]) {
+        position[x] = windowSize[x] * 2 - position[x];
+        direction[x] *= -1; 
+    }
+    if (position[y] > windowSize[y] - squidSize[y]) {
+        position[y] = windowSize[y] * 2 - position[y];
+        direction[y] *= -1; 
+    }
+    if (position[x] < 0) {
+        position[x] *= -1;
+        direction[x] *= -1; 
+    }
+    if (position[y] < 0) {
+        position[y] *= -1;
+        direction[y] *= -1; 
+    }
+
 
     led->setGeometry(
         position[x],position[y],
