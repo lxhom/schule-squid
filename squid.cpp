@@ -4,24 +4,24 @@
 
 Squid::Squid(QWidget *parent) {
 
-    speed[0] = rand()%10+1;
-    speed[1] = rand()%10+1;
+    speed[x] = rand()%10+1;
+    speed[y] = rand()%10+1;
 
-    windowSize[0] = parent->width();
-    windowSize[1] = parent->height();
+    windowSize[x] = parent->width();
+    windowSize[y] = parent->height();
 
     squidSize = rand()%30+20;
 
     // r%2 : 0 / 1 | r%2*2 : 0 / 2 | r%2*2-1 : -1 / 1 
-    direction[0] = rand()%2*2-1;
-    direction[1] = rand()%2*2-1;
+    direction[x] = rand()%2*2-1;
+    direction[y] = rand()%2*2-1;
 
-    position[0] = rand()%(windowSize[0] - squidSize);
-    position[1] = rand()%(windowSize[0] - squidSize);
+    position[x] = rand()%(windowSize[x] - squidSize);
+    position[y] = rand()%(windowSize[y] - squidSize);
 
-    color[0] = rand()%200+25;
-    color[1] = rand()%200+25;
-    color[2] = rand()%200+25;
+    color[r] = rand()%200+25;
+    color[g] = rand()%200+25;
+    color[b] = rand()%200+25;
 
     led = new BLed(parent);
 
@@ -30,16 +30,16 @@ Squid::Squid(QWidget *parent) {
 }
 
 void Squid::update() {
+    position[x] += direction[x] * speed[x];
+    position[y] += direction[y] * speed[y];
+
     led->setGeometry(
-        position[0],position[1],
+        position[x],position[y],
         squidSize,squidSize
     );
-
     led->setColor(QColor(
-        color[0], color[1], color[2]
+        color[r], color[g], color[b]
     ));
-
-
     led->show();
 }
 
