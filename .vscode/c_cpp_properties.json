@@ -53,10 +53,6 @@
             "intelliSenseMode": "gcc-x64",
             "compilerPath": "C:\\Qt\\Qt5.12.9\\Tools\\mingw730_64\\bin\\g++.exe",
             "compilerArgs": [],
-            "intelliSenseModeIsExplicit": true,
-            "cStandardIsExplicit": true,
-            "cppStandardIsExplicit": true,
-            "compilerPathIsExplicit": true,
             "browse": {
                 "path": [
                     "${workspaceFolder}/**",
