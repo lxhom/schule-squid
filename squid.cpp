@@ -20,9 +20,7 @@ Squid::Squid(QWidget *parent) {
     position[x] = rand()%(windowSize[x] - squidSize[x]);
     position[y] = rand()%(windowSize[y] - squidSize[y]);
 
-    color[r] = rand()%200+25;
-    color[g] = rand()%200+25;
-    color[b] = rand()%200+25;
+    randomizeColors(color[r], color[g], color[b]);
 
     led = new BLed(parent);
 
@@ -60,6 +58,15 @@ void Squid::update() {
         color[r], color[g], color[b]
     ));
     led->show();
+}
+
+void Squid::randomizeColors(int& r, int& g, int& b) {
+    for (int i=0; i<3; i++) {
+        r = rand()%200+25;
+        g = rand()%200+25;
+        b = rand()%200+25;
+    }
+
 }
 
 Squid::~Squid() {

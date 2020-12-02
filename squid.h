@@ -13,7 +13,7 @@ private:
     int position[2];
     int color[3];
     BLed* led;
-
+    void randomizeColors(int& r, int& g, int& b);
 public:
     void update();
     Squid(QWidget *parent=0);
