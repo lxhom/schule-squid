@@ -1,7 +1,7 @@
 # Squid documentation
 
 ## This section covers the following files:
-- [Squid.pro](Squid.pro)
+- [Squid.pro](/Squid.pro)
 
 ------
 

@@ -8,7 +8,7 @@
 
 First, we should take a look at the header file.
 
-##### From [widget.h](widget.h)
+##### From [widget.h](/widget.h)
 ```h
 #ifndef WIDGET_H
 #define WIDGET_H
@@ -29,7 +29,7 @@ This part of the code just loads the libraries for the program (and checks for W
 
 ------
 Now we have to actually define the Widget object.
-##### From [widget.h](widget.h)
+##### From [widget.h](/widget.h)
 ```h
 class Widget : public QWidget {
     Q_OBJECT
@@ -51,7 +51,7 @@ Now we can take a look at the members of `Widget`.
 ### (`public`) `Widget()`
 This function is called when the window is opened, or to be precise, when the Widget gets initialized. It executes the following code:
 
-##### From [widget.cpp](widget.cpp)
+##### From [widget.cpp](/widget.cpp)
 ```cpp
 Widget::Widget(QWidget *parent) : QWidget(parent) {
     this->resize(500,500);
@@ -71,7 +71,7 @@ The `Widget::Widget(QWidget *parent) : QWidget(parent) { ... }` just declares th
 
 Now we have the for loop (`for (int i=0; i<10; i++) { ... }`) which counts from 0-9 and stores it into a variable. This for loop has the following body:
 
-##### From [widget.cpp](widget.cpp)
+##### From [widget.cpp](/widget.cpp)
 ```cpp
 squids[i] = new Squid(this);
 ```
@@ -80,7 +80,7 @@ It constructs a new Squid (`new Squid(this)`) and stores it into the squids arra
 Here is the end of the for loop body.
 
 Now we initialize the timer:
-##### From [widget.cpp](widget.cpp)
+##### From [widget.cpp](/widget.cpp)
 ```cpp
 timer = new QTimer(this);
 timer->connect(timer,SIGNAL(timeout()),this,SLOT(updater()));
@@ -103,7 +103,7 @@ Now we only have the end of the constructor function and that's it.
 
 This is the destructor. You'll know what it does when I show you the function:
 
-##### From [widget.cpp](widget.cpp)
+##### From [widget.cpp](/widget.cpp)
 ```cpp
 Widget::~Widget() {
 }
@@ -131,7 +131,7 @@ That's all.
 
 This is the function connected to the timer which just calls the update function for each instance of Squid. It looks like this:
 
-##### From [widget.cpp](widget.cpp)
+##### From [widget.cpp](/widget.cpp)
 ```cpp
 void Widget::updater() {
     for (int i=0; i<10; i++) {

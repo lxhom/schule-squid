@@ -2,14 +2,14 @@
 ## Index:
 
 C++/Header files: 
-- [bild.h/cpp & bled.h/cpp](docs/bild-bled.md)
-- [main.cpp](docs/main.md)
-- [squid.h/cpp](docs/squid.md)
-- [widget.h/cpp](docs/widget.md)
+- [bild.h/cpp & bled.h/cpp](/docs/bild-bled.md)
+- [main.cpp](/docs/main.md)
+- [squid.h/cpp](/docs/squid.md)
+- [widget.h/cpp](/docs/widget.md)
 
 Other files:
-- [Squid_win.pro.user & Squid.pro.user](docs/prouser.md)
-- [Squid.pro](docs/pro.md)
+- [Squid_win.pro.user & Squid.pro.user](/docs/prouser.md)
+- [Squid.pro](/docs/pro.md)
 
 ------
 

@@ -1,10 +1,10 @@
 # Squid documentation
 
 ## This section covers the following files:
-- [bild.cpp](bild.cpp)
-- [bild.h](bild.h)
-- [bled.cpp](bled.cpp)
-- [bled.h](bled.h)
+- [bild.cpp](/bild.cpp)
+- [bild.h](/bild.h)
+- [bled.cpp](/bled.cpp)
+- [bled.h](/bled.h)
 
 ------
 

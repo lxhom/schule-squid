@@ -1,7 +1,7 @@
 # Squid documentation
 
 ## This section covers the following files:
-- [Files](path/to/file)
+- [Files](/path/to/file)
 
 ------
 

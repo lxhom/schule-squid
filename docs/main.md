@@ -1,7 +1,7 @@
 # Squid documentation
 
 ## This section covers the following files:
-- [main.cpp](main.cpp)
+- [main.cpp](/main.cpp)
 
 ------
 
