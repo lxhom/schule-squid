@@ -88,8 +88,9 @@ timer->start(16);
 ```
 What it does | The code
 ------ | ------
-It constructs | (`timer = new QTimer(this)`)
-and starts a timer which calls the slot `updater()` | (`timer->connect(timer,SIGNAL(timeout()),this,SLOT(updater()));`) 
+It constructs | `timer = new QTimer(this);`
+a timer which waits for the timeout signal from the timer `updater()` | `timer->connect(timer,SIGNAL(timeout()),`
+and calls `updater()` | `this,SLOT(updater()));`
 once every 16ms. | (`timer->start(16)`)
 
 If you're wondering why i picked exactly 16ms: I want the program to run at 60fps, and to get that we have to divide one second, or 1000 milliseconds, through 60. This results in 16.66666 and I just rounded it to 16.
