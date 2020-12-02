@@ -15,4 +15,4 @@ More infos about the modified version of BLed can be found [here](http://babydev
 
 ------
 
-###### Last documented commit: [645e48](645e488ff2cf22c445d481c43773a3a65adf9ac8)
+###### Last documented commit: [645e48](https://github.com/lxhom/schule-squid/commit/645e488ff2cf22c445d481c43773a3a65adf9ac8)

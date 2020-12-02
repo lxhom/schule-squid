@@ -144,4 +144,4 @@ This just loops through 0-9 in the Squids array and calls the `update()` functio
 
 ------
 
-###### Last documented commit: [4e80f1](4e80f176ab2e3420eaf460dd1d95cdfae21e8901)
+###### Last documented commit: [4e80f1](https://github.com/lxhom/schule-squid/commit/4e80f176ab2e3420eaf460dd1d95cdfae21e8901)
