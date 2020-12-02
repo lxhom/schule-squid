@@ -29,24 +29,34 @@ Squid::Squid(QWidget *parent) {
 }
 
 void Squid::update() {
+    int collision = false;
+
     position[x] += direction[x] * speed[x];
     position[y] += direction[y] * speed[y];
 
     if (position[x] > windowSize[x] - squidSize[x]) {
         position[x] = (windowSize[x] - squidSize[x]) * 2 - position[x];
         direction[x] *= -1; 
+        collision = true;
     }
     if (position[y] > windowSize[y] - squidSize[y]) {
         position[y] = (windowSize[y] - squidSize[y]) * 2 - position[y];
         direction[y] *= -1; 
+        collision = true;
     }
     if (position[x] <= 0) {
         position[x] *= -1;
         direction[x] *= -1; 
+        collision = true;
     }
     if (position[y] <= 0) {
         position[y] *= -1;
         direction[y] *= -1; 
+        collision = true;
+    }
+
+    if (collision) {
+        randomizeColors(color[r], color[g], color[b]);
     }
 
 
