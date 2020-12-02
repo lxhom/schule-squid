@@ -57,10 +57,10 @@ Widget::Widget(QWidget *parent) : QWidget(parent) {
     this->resize(500,500);
     for (int i=0; i<10; i++) {
         squids[i] = new Squid(this);
-        timer = new QTimer(this);
-        timer->connect(timer,SIGNAL(timeout()),this,SLOT(updater()));
-        timer->start(16);
     }
+    timer = new QTimer(this);
+    timer->connect(timer,SIGNAL(timeout()),this,SLOT(updater()));
+    timer->start(16);
 }
 ```
 This might seem like a lot, but its fairly simple. Lets go through it.
@@ -74,18 +74,27 @@ Now we have the for loop (`for (int i=0; i<10; i++) { ... }`) which counts from 
 ##### From [widget.cpp](widget.cpp)
 ```cpp
 squids[i] = new Squid(this);
+```
+It constructs a new Squid (`new Squid(this)`) and stores it into the squids array (`squids[i] =`) (we'll talk about that later)
+
+Here is the end of the for loop body.
+
+Now we initialize the timer:
+##### From [widget.cpp](widget.cpp)
+```cpp
 timer = new QTimer(this);
 timer->connect(timer,SIGNAL(timeout()),this,SLOT(updater()));
 timer->start(16);
 ```
-
-This does only 2 things:
-- It constructs a new Squid (`new Squid(this)`) and stores it into the squids array (`squids[i] =`) (we'll talk about that later)
-- It constructs (`timer = new QTimer(this)`) and starts a timer which calls the slot `updater()` (`timer->connect(timer,SIGNAL(timeout()),this,SLOT(updater()));`) once every 16ms (`timer->start(16)`) (we'll talk about that later too)
+What it does | The code
+------ | ------
+It constructs | (`timer = new QTimer(this)`)
+and starts a timer which calls the slot `updater()` | (`timer->connect(timer,SIGNAL(timeout()),this,SLOT(updater()));`) 
+once every 16ms. | (`timer->start(16)`)
 
 If you're wondering why i picked exactly 16ms: I want the program to run at 60fps, and to get that we have to divide one second, or 1000 milliseconds, through 60. This results in 16.66666 and I just rounded it to 16.
 
-Now we only have the end of the for loop and the end of the constructor.
+Now we only have the end of the constructor function and that's it.
 
 ------
 
@@ -134,4 +143,4 @@ This just loops through 0-9 in the Squids array and calls the `update()` functio
 
 ------
 
-###### Last documented commit: [645e48](645e488ff2cf22c445d481c43773a3a65adf9ac8)
+###### Last documented commit: [4e80f1](4e80f176ab2e3420eaf460dd1d95cdfae21e8901)
