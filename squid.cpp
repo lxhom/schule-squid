@@ -71,12 +71,9 @@ void Squid::update() {
 }
 
 void Squid::randomizeColors(int& r, int& g, int& b) {
-    for (int i=0; i<3; i++) {
-        r = rand()%200+25;
-        g = rand()%200+25;
-        b = rand()%200+25;
-    }
-
+    r = rand()%200+25;
+    g = rand()%200+25;
+    b = rand()%200+25;
 }
 
 Squid::~Squid() {
