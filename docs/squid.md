@@ -256,11 +256,13 @@ The function body is very simple:
 ##### From [squid.cpp](/squid.cpp)
 
 ```cpp
-for (int i=0; i<3; i++) {
-    r = rand()%200+25;
-    g = rand()%200+25;
-    b = rand()%200+25;
-}
+r = rand()%200+25;
+g = rand()%200+25;
+b = rand()%200+25;
 ```
 
-###### todo: fix that weird function cus wth is that for loop doing there??? lmao
+## to be continued
+
+------
+
+###### Last documented commit: [cb8d07](https://github.com/lxhom/schule-squid/commit/cb8d070f28e6ab46022b259babf2ac26d232e32c)
