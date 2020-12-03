@@ -1,0 +1,266 @@
+# Squid documentation
+
+## This section covers the following files:
+- [squid.h](/squid.h)
+- [squid.cpp](/squid.cpp)
+
+------
+
+First, we should take a look at start of the header and the C++ file:
+
+##### From [squid.h](/squid.h)
+
+```h
+#include "bled.h"
+```
+
+##### From [squid.cpp](/squid.cpp)
+
+```cpp
+#include "squid.h"
+#include "bled.h"
+#include <QColor>
+```
+
+Those are the libraries used in the Squid class. And on that note, we should look at the header file, or to be specific, the Squid class definition:
+
+------
+
+##### From [squid.h](/squid.h)
+
+```h
+class Squid {
+private:
+    int x = 0; int y = 1;
+    int r = 0; int g = 1; int b = 2; 
+    int speed[2];
+    int windowSize[2];
+    int squidSize[2];
+    int direction[2];
+    int position[2];
+    int color[3];
+    BLed* led;
+    void randomizeColors(int& r, int& g, int& b);
+public:
+    void update();
+    Squid(QWidget *parent=0);
+    ~Squid();
+};
+```
+
+------
+
+`class Squid { ... }` just declares the class Squid.
+
+------
+
+### (`private`) `int x` | `int y` | `int r` | `int g` | `int b`
+
+To demonstrate why I declared those variables I've made a example:
+
+```cpp
+position = [30,50]; // x position, y position
+color = [255, 255, 128]; // red value, green value, blue value
+
+// We could do this:
+setXPosition(position[0]);
+setYPosition(position[1]);
+// And this:
+setRedValue(color[0])
+setGreenValue(color[1])
+setBlueValue(color[2])
+
+
+// But we can also do this:
+x = 0; y = 1;
+r = 0; g = 1; b = 2;
+
+// And now we can do this:
+setXPosition(position[x]);
+setYPosition(position[y]);
+// And this:
+setRedValue(color[r])
+setGreenValue(color[g])
+setBlueValue(color[b])
+```
+
+It's not neccesary, but it just makes the code much cleaner and makess it easier to read.
+
+------
+
+### (`public`) `Squid(QWidget *parent)`
+
+This is the constructor for Squid. The *parent pointer is used to acess the parent / widget.
+
+Note: I'll  explain most of the code below in the matching class member explanations.
+
+##### From [squid.cpp](/squid.cpp)
+
+```cpp
+speed[x] = rand()%2+1;
+speed[y] = rand()%2+1;
+
+windowSize[x] = parent->width();
+windowSize[y] = parent->height();
+
+squidSize[x] = rand()%30+20;
+squidSize[y] = rand()%30+20;
+
+// r%2 : 0 / 1 | r%2*2 : 0 / 2 | r%2*2-1 : -1 / 1 
+direction[x] = rand()%2*2-1;
+direction[y] = rand()%2*2-1;
+
+position[x] = rand()%(windowSize[x] - squidSize[x]);
+position[y] = rand()%(windowSize[y] - squidSize[y]);
+
+randomizeColors(color[r], color[g], color[b]);
+
+led = new BLed(parent);
+
+update();
+```
+
+This code basically initializes all the member variables of Squid. The only thing worth noting here is the `update()` at the end, it is used to show the Squid at the beginning. 
+
+------
+
+### (`private`) `int speed[2]`
+
+This is the variable that stores the x and y speed of the squid.
+
+It is defined here:
+
+##### From [squid.cpp](/squid.cpp)
+
+```cpp
+speed[x] = rand()%2+1;
+speed[y] = rand()%2+1;
+```
+
+`rand()%2` is used to get a integer with `0 <= n < 2`, which results in `[0,1]`. We add 1 to get `[1,2]`. We do that with x and y.
+
+------
+
+### (`private`) `int windowSize[2]`
+
+This is the variable that stores the dimensions of the window.
+
+It is defined here:
+
+##### From [squid.cpp](/squid.cpp)
+
+```cpp
+windowSize[x] = parent->width();
+windowSize[y] = parent->height();
+```
+
+This stores the window width and height into the windowSize array.
+
+------
+
+### (`private`) `int squidSize[2]`
+
+This is the variable that stores the dimensions of the squid.
+
+It is defined here:
+
+##### From [squid.cpp](/squid.cpp)
+
+```cpp
+squidSize[x] = rand()%30+20;
+squidSize[y] = rand()%30+20;
+```
+
+`rand()%30` is used to get a integer with `0 <= n < 30`, which results in `[0...29]`. We add 20 to get `[20...49]`. We do that with x and y.
+
+------
+
+### (`private`) `int direction[2]`
+
+This is the variable that stores the x and y direction of the squid.
+
+Note that this isn't supposed to be a speed variable, but the direction. The `update()` function uses `position += speed * direction`. `direction` should be -1 or 1.
+
+It is defined here:
+
+##### From [squid.cpp](/squid.cpp)
+
+```cpp
+direction[x] = rand()%2*2-1;
+direction[y] = rand()%2*2-1;
+```
+
+`rand()%2` is used to get a integer with `0 <= n < 2`, which results in `[0,1]`. We multiply it by 2 to get `[0,2]` and then we subtract 1 to get `[-1,1]`. We do that with x and y.
+
+------
+
+### (`private`) `int position[2]`
+
+This is the variable that stores the x and y position of the squid.
+
+It is defined here:
+
+##### From [squid.cpp](/squid.cpp)
+
+```cpp
+position[x] = rand()%(windowSize[x] - squidSize[x]);
+position[y] = rand()%(windowSize[y] - squidSize[y]);
+```
+
+You might notice the `windowSize-squidSize` there. We need to do that because the squid could spawn out of the borders, or inside of the border. To make this more clear here's a visualisation:
+###### [(Direct image link)](/docs/img/sizesubtraction.png)
+![Illustration why we have to subtract the size](/docs/img/sizesubtraction.png)
+
+We use `rand()%[maxPos]` to get a value that's still in the borders.
+
+------
+
+### (`private`) `int color[3]`
+
+This variable is used to store the color of the squid.
+
+It is defined here:
+
+##### From [squid.cpp](/squid.cpp)
+
+```cpp
+randomizeColors(color[r], color[g], color[b]);
+```
+
+The `randomizeColors()` function is explained later.
+
+------
+
+### (`private`) `BLed* led`
+
+This is the variable that stores the BLed.
+
+It is defined here:
+
+##### From [squid.cpp](/squid.cpp)
+
+```cpp
+led = new BLed(parent);
+```
+
+------
+
+### (`private`) `randomizeColors(int& r, int& g, int& b)`
+
+This is the function which is used to randomize colors. I made this into a seperate function because it might be called in the future outside of the costructor.
+
+We are passing the `r`, `g`, and `b` variables as references to modify the colors by using the reference operator `&`.
+
+The function body is very simple:
+
+##### From [squid.cpp](/squid.cpp)
+
+```cpp
+for (int i=0; i<3; i++) {
+    r = rand()%200+25;
+    g = rand()%200+25;
+    b = rand()%200+25;
+}
+```
+
+###### todo: fix that weird function cus wth is that for loop doing there??? lmao

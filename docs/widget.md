@@ -1,8 +1,8 @@
 # Squid documentation
 
 ## This section covers the following files:
-- [widget.h](widget.h)
-- [widget.cpp](widget.cpp)
+- [widget.h](/widget.h)
+- [widget.cpp](/widget.cpp)
 
 ------
 
@@ -48,7 +48,7 @@ Now we can take a look at the members of `Widget`.
 
 ------
 
-### (`public`) `Widget()`
+### (`public`) `Widget(QWidget *parent=0)`
 This function is called when the window is opened, or to be precise, when the Widget gets initialized. It executes the following code:
 
 ##### From [widget.cpp](/widget.cpp)
@@ -127,7 +127,7 @@ That's all.
 
 ------
 
-### (`public slots`) `void updater`
+### (`public slots`) `void updater()`
 
 This is the function connected to the timer which just calls the update function for each instance of Squid. It looks like this:
 
