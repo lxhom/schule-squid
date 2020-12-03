@@ -245,7 +245,7 @@ led = new BLed(parent);
 
 ------
 
-### (`private`) `randomizeColors(int& r, int& g, int& b)`
+### (`private`) `void randomizeColors(int& r, int& g, int& b)`
 
 This is the function which is used to randomize colors. I made this into a seperate function because it might be called in the future outside of the costructor.
 
@@ -261,7 +261,90 @@ g = rand()%200+25;
 b = rand()%200+25;
 ```
 
-## to be continued
+------
+
+### (`public`) `~Squid()`
+
+This is the deconstructor. I think the code says everything that needs to be said:
+
+##### From [squid.cpp](/squid.cpp)
+
+```cpp
+Squid::~Squid() {
+    // do we really need this? nah
+}
+```
+
+------
+
+### (`public`) `void update()`
+
+This is the update function which should be called every single frame. 
+
+It does 3 main things:
+
+- Move the squid.
+- Check for collisions with the borders.
+  - If it collides, move it into the box,
+  - and change the direction.
+  - And then we change the color.
+- Then we show the updated squid.
+
+------
+
+To start, we declare a local variable called collision, and set it to false. We will come back to this later.
+
+##### From [squid.cpp](/squid.cpp)
+
+```cpp
+int collision = false;
+```
+
+------
+
+### Moving the squid
+To move the squid, we can use a simple formula:
+
+```
+position = position + direction * speed
+```
+
+We can shorten that into this:
+
+```
+position += direction * speed
+```
+
+Now we just need to do that for every dimension, and we are good to go.
+
+##### From [squid.cpp](/squid.cpp)
+
+```cpp
+position[x] += direction[x] * speed[x];
+position[y] += direction[y] * speed[y];
+```
+
+------
+
+### Collision detection
+
+There are 2 if clauses for every dimension. The first one might seem a little bit confusing, but it's actually pretty simple.
+
+```cpp
+if (position > windowSize - squidSize) {...}
+if (position <= 0) {...}
+```
+
+To understand why we should do `windowSize - squidSize` we should take a look at this:
+
+###### [(Direct image link)](/docs/img/sizesubtraction.png)
+![Illustration why we have to subtract the size](/docs/img/sizesubtraction.png)
+
+The size needs to be subtracted from the border to make the whole squid collide with the walls, and not just the top left corner, a.k.a the position. Now that we have the collision, we can do something to avoid the squid going off-screen.
+
+------
+
+###### todo write this
 
 ------
 
