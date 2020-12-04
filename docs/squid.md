@@ -344,7 +344,215 @@ The size needs to be subtracted from the border to make the whole squid collide 
 
 ------
 
-###### todo write this
+### Moving the squid into the box again
+
+This is super easy for postion <= 0. We can just invert the value, and we're good to go.
+
+##### From [squid.cpp](/squid.cpp)
+
+```cpp
+if (position[x] <= 0) {
+    position[x] *= -1;
+    // [...]
+}
+if (position[y] <= 0) {
+    position[y] *= -1;
+    // [...]
+}
+```
+The other end of the box is a much harder task though. We have 2 things that weren't a problem before:
+
+- We can't just do `*= -1` because that'd just move it out of the bounds again
+- We need to compensate the squid size (see [Collision detection](#collision-detection))
+
+We can just solve this step-by-step.
+
+To move the squid the same way we did it with the -1 we can use this formula: `position = windowSize * 2 - position`. This might seem a bit weird, but its pretty obvious if we draw it:
+
+
+```
+<---------WindowSize---------->
+|                             |
+--------------Position---------->   [Out of the borders!]
+|                             |
+<---------WindowSize---------->
+```
+```
+<---------WindowSize----------><---------WindowSize---------->
+|                             |                              |
+|                           <--------------Position-----------
+|                             |
+<---------WindowSize---------->
+```
+
+Now we just have to subtract the squid size (see [Collision detection](#collision-detection)), and we're good to go. We can do this like that: `position = (windowSize - squidSize) * 2 - position`. And we're done!
+
+
+##### From [squid.cpp](/squid.cpp)
+
+```cpp
+if (position[x] > windowSize[x] - squidSize[x]) {
+    position[x] = (windowSize[x] - squidSize[x]) * 2 - position[x];
+    // [...]
+}
+if (position[y] > windowSize[y] - squidSize[y]) {
+    position[y] = (windowSize[y] - squidSize[y]) * 2 - position[y];
+    // [...]
+}
+if (position[x] <= 0) {
+    position[x] *= -1;
+    // [...]
+}
+if (position[y] <= 0) {
+    position[y] *= -1;
+    // [...]
+}
+```
+
+------
+
+### Changing the direction
+
+This is super easy. We just need to do `direction *= -1` for the matching dimension.
+
+##### From [squid.cpp](/squid.cpp)
+
+```cpp
+if (position[x] > windowSize[x] - squidSize[x]) {
+    position[x] = (windowSize[x] - squidSize[x]) * 2 - position[x];
+    direction[x] *= -1; 
+    // [...]
+}
+if (position[y] > windowSize[y] - squidSize[y]) {
+    position[y] = (windowSize[y] - squidSize[y]) * 2 - position[y];
+    direction[y] *= -1; 
+    // [...]
+}
+if (position[x] <= 0) {
+    position[x] *= -1;
+    direction[x] *= -1; 
+    // [...]
+}
+if (position[y] <= 0) {
+    position[y] *= -1;
+    direction[y] *= -1; 
+    // [...]
+}
+
+```
+
+------
+
+### Changing the color
+
+To change the color, we can set a variable to false and set it to true if it collides, and check later if it is true. We do that so we dont make our if statement for each border 200 lines long.
+
+We can update the update function now:
+
+##### From [squid.cpp](/squid.cpp)
+
+```cpp
+void Squid::update() {
+    int collision = false;
+
+    // [...]
+
+    if (position[x] > windowSize[x] - squidSize[x]) {
+        position[x] = (windowSize[x] - squidSize[x]) * 2 - position[x];
+        direction[x] *= -1; 
+        collision = true;
+    }
+    if (position[y] > windowSize[y] - squidSize[y]) {
+        position[y] = (windowSize[y] - squidSize[y]) * 2 - position[y];
+        direction[y] *= -1; 
+        collision = true;
+    }
+    if (position[x] <= 0) {
+        position[x] *= -1;
+        direction[x] *= -1; 
+        collision = true;
+    }
+    if (position[y] <= 0) {
+        position[y] *= -1;
+        direction[y] *= -1; 
+        collision = true;
+    }
+
+    if (collision) {
+        randomizeColors(color[r], color[g], color[b]);
+    }
+// [...]
+}
+```
+
+------
+
+### Applying / showing the changes
+
+This is done with 3 statements that don't really need much explanation:
+
+##### From [squid.cpp](/squid.cpp)
+
+```cpp
+led->setGeometry(
+    position[x],position[y],
+    squidSize[x],squidSize[y]
+);
+led->setColor(QColor(
+    color[r], color[g], color[b]
+));
+led->show();
+```
+------
+
+The whole update function now looks like this:
+
+
+##### From [squid.cpp](/squid.cpp)
+
+```cpp
+void Squid::update() {
+    int collision = false;
+
+    position[x] += direction[x] * speed[x];
+    position[y] += direction[y] * speed[y];
+
+    if (position[x] > windowSize[x] - squidSize[x]) {
+        position[x] = (windowSize[x] - squidSize[x]) * 2 - position[x];
+        direction[x] *= -1; 
+        collision = true;
+    }
+    if (position[y] > windowSize[y] - squidSize[y]) {
+        position[y] = (windowSize[y] - squidSize[y]) * 2 - position[y];
+        direction[y] *= -1; 
+        collision = true;
+    }
+    if (position[x] <= 0) {
+        position[x] *= -1;
+        direction[x] *= -1; 
+        collision = true;
+    }
+    if (position[y] <= 0) {
+        position[y] *= -1;
+        direction[y] *= -1; 
+        collision = true;
+    }
+
+    if (collision) {
+        randomizeColors(color[r], color[g], color[b]);
+    }
+
+
+    led->setGeometry(
+        position[x],position[y],
+        squidSize[x],squidSize[y]
+    );
+    led->setColor(QColor(
+        color[r], color[g], color[b]
+    ));
+    led->show();
+}
+```
 
 ------
 
