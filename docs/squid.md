@@ -417,7 +417,7 @@ This is super easy. We just need to do `direction *= -1` for the matching dimens
 
 ##### From [squid.cpp](/squid.cpp)
 
-```cpp
+```cpp (nice)
 if (position[x] > windowSize[x] - squidSize[x]) {
     position[x] = (windowSize[x] - squidSize[x]) * 2 - position[x];
     direction[x] *= -1; 
