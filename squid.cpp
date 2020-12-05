@@ -4,8 +4,8 @@
 
 Squid::Squid(QWidget *parent) {
 
-    speed[x] = rand()%2+1;
-    speed[y] = rand()%2+1;
+    speed[x] = rand()%20/10+0.5;
+    speed[y] = rand()%20/10+0.5;
 
     windowSize[x] = parent->width();
     windowSize[y] = parent->height();
@@ -21,6 +21,9 @@ Squid::Squid(QWidget *parent) {
 
     randomizeColors(color[r], color[g], color[b]);
 
+    gravitation[x] = 0;
+    gravitation[y] = -0.05;
+
     led = new BLed(parent);
 
     update();
@@ -33,25 +36,32 @@ void Squid::update() {
     position[x] += direction[x] * speed[x];
     position[y] += direction[y] * speed[y];
 
+    speed[x] -= direction[x] * gravitation[x];
+    speed[y] -= direction[y] * gravitation[y];
+
     if (position[x] > windowSize[x] - squidSize[x]) {
         position[x] = (windowSize[x] - squidSize[x]) * 2 - position[x];
         direction[x] *= -1; 
         collision = true;
+        speed[x] *= 0.95;
     }
     if (position[y] > windowSize[y] - squidSize[y]) {
         position[y] = (windowSize[y] - squidSize[y]) * 2 - position[y];
         direction[y] *= -1; 
         collision = true;
+        speed[y] *= 0.95;
     }
-    if (position[x] <= 0) {
+    if (position[x] < 0) {
         position[x] *= -1;
         direction[x] *= -1; 
+        speed[x] *= 0.95;
         collision = true;
     }
-    if (position[y] <= 0) {
+    if (position[y] < 0) {
         position[y] *= -1;
         direction[y] *= -1; 
         collision = true;
+        speed[y] *= 0.95;
     }
 
     if (collision) {
