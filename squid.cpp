@@ -10,9 +10,8 @@ Squid::Squid(QWidget *parent) {
     windowSize[x] = parent->width();
     windowSize[y] = parent->height();
 
-    squidSize[x] = rand()%30+20;
-    squidSize[y] = rand()%30+20;
-
+    squidSize[x] = squidSize[y] = rand()%30+20;
+    
     // r%2 : 0 / 1 | r%2*2 : 0 / 2 | r%2*2-1 : -1 / 1 
     direction[x] = rand()%2*2-1;
     direction[y] = rand()%2*2-1;
