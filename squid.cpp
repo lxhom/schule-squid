@@ -28,7 +28,7 @@ Squid::Squid(QWidget *parent) {
 }
 
 void Squid::update() {
-    int collision = false;
+    bool collision = false;
 
     position[x] += direction[x] * speed[x];
     position[y] += direction[y] * speed[y];
