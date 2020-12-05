@@ -103,8 +103,7 @@ speed[y] = rand()%2+1;
 windowSize[x] = parent->width();
 windowSize[y] = parent->height();
 
-squidSize[x] = rand()%30+20;
-squidSize[y] = rand()%30+20;
+squidSize[x] = squidSize[y] = rand()%30+20;
 
 // r%2 : 0 / 1 | r%2*2 : 0 / 2 | r%2*2-1 : -1 / 1 
 direction[x] = rand()%2*2-1;
@@ -167,11 +166,10 @@ It is defined here:
 ##### From [squid.cpp](/squid.cpp)
 
 ```cpp
-squidSize[x] = rand()%30+20;
-squidSize[y] = rand()%30+20;
+squidSize[x] = squidSize[y] = rand()%30+20;
 ```
 
-`rand()%30` is used to get a integer with `0 <= n < 30`, which results in `[0...29]`. We add 20 to get `[20...49]`. We do that with x and y.
+`rand()%30` is used to get a integer with `0 <= n < 30`, which results in `[0...29]`. We add 20 to get `[20...49]`. We do that once and store it into both variables to make the LED round.
 
 ------
 
@@ -556,4 +554,4 @@ void Squid::update() {
 
 ------
 
-###### Last documented commit: [cb8d07](https://github.com/lxhom/schule-squid/commit/cb8d070f28e6ab46022b259babf2ac26d232e32c)
+###### Last documented commit: [0fe670](https://github.com/lxhom/schule-squid/commit/0fe67029c8be64c1345eea634a82af72b77926ab)
