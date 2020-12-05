@@ -3,6 +3,7 @@
 #include <QColor>
 
 Squid::Squid(QWidget *parent) {
+    widget = parent;
 
     speed[x] = rand()%20/10+0.5;
     speed[y] = rand()%20/10+0.5;
@@ -22,7 +23,7 @@ Squid::Squid(QWidget *parent) {
     randomizeColors(color[r], color[g], color[b]);
 
     gravitation[x] = 0;
-    gravitation[y] = -0.05;
+    gravitation[y] = -0.1;
 
     led = new BLed(parent);
 
@@ -31,6 +32,9 @@ Squid::Squid(QWidget *parent) {
 }
 
 void Squid::update() {
+    windowSize[x] = widget->width();
+    windowSize[y] = widget->height();
+
     bool collision = false;
 
     position[x] += direction[x] * speed[x];

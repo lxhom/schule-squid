@@ -1,7 +1,7 @@
 #include "bled.h"
 
 class Squid {
-private:
+public:
     // the movement, pos and so on
     // [2] = x, y | [3] = r, g, b
     int x = 0; int y = 1;
@@ -15,7 +15,7 @@ private:
     double gravitation[2];
     BLed* led;
     void randomizeColors(int& r, int& g, int& b);
-public:
+    QWidget *widget;
     void update();
     Squid(QWidget *parent=0);
     ~Squid();
