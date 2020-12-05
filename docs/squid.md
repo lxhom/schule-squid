@@ -295,7 +295,7 @@ To start, we declare a local variable called collision, and set it to false. We 
 ##### From [squid.cpp](/squid.cpp)
 
 ```cpp
-int collision = false;
+bool collision = false;
 ```
 
 ------
@@ -451,7 +451,7 @@ We can update the update function now:
 
 ```cpp
 void Squid::update() {
-    int collision = false;
+    bool collision = false;
 
     // [...]
 
@@ -510,7 +510,7 @@ The whole update function now looks like this:
 
 ```cpp
 void Squid::update() {
-    int collision = false;
+    bool collision = false;
 
     position[x] += direction[x] * speed[x];
     position[y] += direction[y] * speed[y];
@@ -554,4 +554,4 @@ void Squid::update() {
 
 ------
 
-###### Last documented commit: [0fe670](https://github.com/lxhom/schule-squid/commit/0fe67029c8be64c1345eea634a82af72b77926ab)
+###### Last documented commit: [61ab64](https://github.com/lxhom/schule-squid/commit/61ab64a3f3f19b1a12d3c0e6a1b973b351511709)
