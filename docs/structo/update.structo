@@ -1,0 +1,17 @@
+CAPTION: void update()
+collision = false
+position += direction * speed
+IF: position < 0
+position *= -1
+direction *= -1
+collision = true
+ENDIF: 
+IF: position > windowSize - squidSize
+position = (windowSize - squidSize) * 2 - position
+direction *= -1
+collision = true
+ENDIF:
+IF: collision = true
+randomizeColors()
+ENDIF:
+showChanges()

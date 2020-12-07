@@ -552,6 +552,10 @@ void Squid::update() {
 }
 ```
 
+And here's the whole update function as a structogram:
+
+![Structogram](structo/update.structo.png)
+
 ------
 
 ###### Last documented commit: [61ab64](https://github.com/lxhom/schule-squid/commit/61ab64a3f3f19b1a12d3c0e6a1b973b351511709)
