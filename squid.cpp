@@ -1,78 +1,108 @@
 #include "squid.h"
 #include "bled.h"
 #include <QColor>
+#include <iostream>
 
 Squid::Squid(QWidget *parent) {
+
+    // Store parent into a var
     widget = parent;
 
-    speed[x] = rand()%20/10+0.5;
-    speed[y] = rand()%20/10+0.5;
+    // Initialize squidSize[x,y] for anything between [20..50] with step=1
+    squidSize[x] = squidSize[y] = rand()%31+20;
 
+    // Initialize window size
     windowSize[x] = parent->width();
     windowSize[y] = parent->height();
 
-    squidSize[x] = squidSize[y] = rand()%30+20;
-    
-    // r%2 : 0 / 1 | r%2*2 : 0 / 2 | r%2*2-1 : -1 / 1 
-    direction[x] = rand()%2*2-1;
-    direction[y] = rand()%2*2-1;
+    // loop: dimension for d in [x,y] (0,1)
+    for (int d = x; d <= y; d++) {
 
-    position[x] = rand()%(windowSize[x] - squidSize[x]);
-    position[y] = rand()%(windowSize[y] - squidSize[y]);
+        // Initialize speed for anything between [0.5..2.5] with step=0.1
+        speed[d] = rand()%21/10+0.5;
 
+        // Initialize direction for anything between [-1..1] with step=2 (-1|1)
+        direction[d] = rand()%2*2-1;
+
+        // Initialize position for anything between [0...windowSize[x] - squidSize[x]] with step=1
+        position[d] = rand()%(windowSize[d] - squidSize[d]);
+    }
+
+    // Initialize color for anything between [25..225] with step=1
     randomizeColors(color[r], color[g], color[b]);
 
+    // Initialize the gravitation values
     gravitation[x] = 0;
     gravitation[y] = -0.1;
 
+    // Create the LED's
     led = new BLed(parent);
 
+    // Call the update function
     update();
 
 }
 
 void Squid::update() {
+
+    // update borders
     windowSize[x] = widget->width();
     windowSize[y] = widget->height();
 
-    bool collision = false;
+    // init collisions array
+    bool collisions[2] = {false, false};
 
-    position[x] += direction[x] * speed[x];
-    position[y] += direction[y] * speed[y];
+    // loop: dimension for d in [x,y] (0,1)
+    for (int d = x; d <= y; d++) {
+        // Position
 
-    speed[x] -= direction[x] * gravitation[x];
-    speed[y] -= direction[y] * gravitation[y];
+        // pos update
+        position[d] += direction[d] * speed[d];
 
-    if (position[x] > windowSize[x] - squidSize[x]) {
-        position[x] = (windowSize[x] - squidSize[x]) * 2 - position[x];
-        direction[x] *= -1; 
-        collision = true;
-        speed[x] *= 0.95;
+        // Speed
+
+        // speed update
+        speed[d] -= direction[d] * gravitation[d];
+
+        // negative speed correction
+        if (speed[d] < 0) { 
+            speed[d] *= -1; 
+            direction[d] *= -1; 
+        }
+
+        // Border collision
+
+        // border collision for pos = windowsize
+        if (position[d] > windowSize[d] - squidSize[d]) {
+            position[d] = (windowSize[d] - squidSize[d]) * 2 - position[d];
+            collisions[d] = true;
+        }
+
+        // border collision for pos = 0
+        if (position[d] < 0) {
+            position[d] *= -1;
+            collisions[d] = true;
+        }
+
+        // border collision corrections and other stuff
+        if (collisions[d]) {
+
+            // direction correction
+            direction[d] *= -1;
+
+            // speed correction
+            speed[d] *= 0.95;
+            speed[d] -= 0.25;
+            if (speed[d] < 0) speed[d] = 0;
+
+            // color change
+            if (speed[d] != 0) {
+                randomizeColors(color[r], color[g], color[b]);
+            }
+        }
     }
-    if (position[y] > windowSize[y] - squidSize[y]) {
-        position[y] = (windowSize[y] - squidSize[y]) * 2 - position[y];
-        direction[y] *= -1; 
-        collision = true;
-        speed[y] *= 0.95;
-    }
-    if (position[x] < 0) {
-        position[x] *= -1;
-        direction[x] *= -1; 
-        speed[x] *= 0.95;
-        collision = true;
-    }
-    if (position[y] < 0) {
-        position[y] *= -1;
-        direction[y] *= -1; 
-        collision = true;
-        speed[y] *= 0.95;
-    }
 
-    if (collision) {
-        randomizeColors(color[r], color[g], color[b]);
-    }
-
-
+    // Apply the changes
     led->setGeometry(
         position[x],position[y],
         squidSize[x],squidSize[y]
@@ -83,10 +113,11 @@ void Squid::update() {
     led->show();
 }
 
+// Initialize {r,g,b} for anything between [25..225] with step=1
 void Squid::randomizeColors(int& r, int& g, int& b) {
-    r = rand()%200+25;
-    g = rand()%200+25;
-    b = rand()%200+25;
+    r = rand()%201+25;
+    g = rand()%201+25;
+    b = rand()%201+25;
 }
 
 Squid::~Squid() {
