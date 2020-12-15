@@ -11,7 +11,7 @@ Widget::Widget(QWidget *parent) : QWidget(parent) {
     timer = new QTimer(this);
     timer->connect(timer,SIGNAL(timeout()),this,SLOT(updater()));
     timer->start(16);
-    startpos[0] = -1;
+    startpos[0] = -99999;
 }
 
 void Widget::updater() {
@@ -26,7 +26,7 @@ Widget::~Widget() {
 void Widget::mouseMoveEvent(QMouseEvent *event) {
     double delX = event->x()-Widget::startpos[0];
     double delY = event->y()-Widget::startpos[1];
-    if (Widget::startpos[0] != -1) {
+    if (Widget::startpos[0] != -99999) {
         for (int i=0; i<10; i++) {
             squids[i]->speed[0] += squids[i]->direction[0] * 0.05 * delX;
             squids[i]->speed[1] += squids[i]->direction[1] * 0.05 * delY;
@@ -45,6 +45,6 @@ void Widget::mousePressEvent(QMouseEvent *event) {
 
 void Widget::mouseReleaseEvent(QMouseEvent *event) {
     if (event->button() == Qt::LeftButton) {
-        Widget::startpos[0] = -1;
+        Widget::startpos[0] = -99999;
     }
 }
