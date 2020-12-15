@@ -85,6 +85,26 @@ getAllResults = function(func, iterations) {
 };
 ```
 
+This can now be copied into a Browser JS Console or a NodeJS Console (with `.load coffeedebug/CtoCS.js`). Example:
+
+```js
+> .load coffeedebug/CtoCS.js
+[...]
+< [Function: getAllResults]
+
+> rand()
+< 27312
+
+> getAllResults(function(){return rand()%5*1.5+1.5}, 30)
+< [ 1.5, 3, 4.5, 6, 7.5 ]
+
+> getAllResults(()=>rand()%2*2-1, 50)
+< [ -1, 1 ]
+
+> getAllResults("rand()%5+1",1000)
+< [ 1, 2, 3, 4, 5 ]
+```
+
 ------
 
 ###### Last documented commit: [586d39](https://github.com/lxhom/schule-squid/586d39d3f7d4195aa4af83e099135960afb38788)
