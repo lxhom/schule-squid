@@ -1,7 +1,6 @@
 #include "squid.h"
 #include "bled.h"
 #include <QColor>
-#include <iostream>
 
 Squid::Squid(QWidget *parent) {
 
