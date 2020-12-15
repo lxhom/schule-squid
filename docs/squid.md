@@ -1,3 +1,5 @@
+[](school_project?_more_like_rocket_science)
+
 # Squid documentation
 
 ## This section covers the following files:
