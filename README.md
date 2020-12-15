@@ -10,7 +10,8 @@ C++/Header files:
 Other files:
 - [Squid_win.pro.user & Squid.pro.user](/docs/prouser.md)
 - [Squid.pro](/docs/pro.md)
+- [coffeedebug/CtoCS.coffe/js](/docs/coffeedebug.md)
 
 ------
 
-###### Last documented commit: [645e48](https://github.com/lxhom/schule-squid/commit/645e488ff2cf22c445d481c43773a3a65adf9ac8)
+###### Last documented commit: [586d39](https://github.com/lxhom/schule-squid/586d39d3f7d4195aa4af83e099135960afb38788)

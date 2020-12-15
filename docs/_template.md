@@ -1,11 +1,13 @@
 # Squid documentation
 
 ## This section covers the following files:
-- [Files](/path/to/file)
+- [File](/path/to/file)
+- [File](/path/to/file)
+- [File](/path/to/file)
 
 ------
 
-Content
+Jellyfish and Squids are the same change my mind
 
 ------
 
