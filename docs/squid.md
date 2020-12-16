@@ -349,6 +349,10 @@ It does these main things:
             - If it isn't, change the color.
 - Then we show the updated squid.
 
+Or as a flowchart:
+
+![Flowchart](/docs/flow/update.flow.svg)
+
 ------
 
 ### Window size changes

@@ -1,0 +1,38 @@
+void update()
+
+Update the window size
+
+for (dimension = x; dimension <= y; dimension++) {
+  
+  Move the Squid
+  
+  Apply the gravitation
+  
+  if (Did the gravitation
+  set the
+  speed to a 
+  negative value? ) Change the direction
+  
+  Check for collisions
+  
+  if (Does the
+  squid collide?) { Move it back into the box
+  
+    Change the direction
+    
+    Apply friction
+    
+    if(Did the friction
+    set the speed
+    to below zero?)
+    
+    Set the speed to
+    zero
+    
+    if(Is the speed zero) {} else {
+      call Change the Color
+    }
+  }
+}
+
+Show the updated squid
