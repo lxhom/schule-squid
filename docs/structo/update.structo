@@ -1,17 +1,45 @@
-CAPTION: void update()
-collision = false
-position += direction * speed
-IF: position < 0
-position *= -1
-direction *= -1
-collision = true
-ENDIF: 
-IF: position > windowSize - squidSize
-position = (windowSize - squidSize) * 2 - position
-direction *= -1
-collision = true
+CAPTION: Squid::update()
+RETURN: Updating the borders
+Assign widget->width() to windowSize[x]
+Assign widget->height() to windowSize[y]
+RETURN: Initialize the collisions array
+Define collisions[2] as {false, false}
+RETURN: Dimensions loop
+FOR: For d in [x, y]
+RETURN: Position update
+Add direction[d] * speed[d] to position[d]
+RETURN: Speed update
+Subtract direction[d] * gravitation[d] from speed[d]
+RETURN: Negative speed correction
+IF: If speed[d] < 0
+Multiply speed[d] by -1
+Multiply direction[d] by -1
 ENDIF:
-IF: collision = true
-randomizeColors()
+RETURN: Border collisions
+IF: If position[d] > windowSize[d] - squidSize[d]
+Set position[d] to (windowSize[d] - squidSize[d]) * 2 - position[d]
+Set collisions[d] to true;
 ENDIF:
-showChanges()
+IF: If position[d] < 0
+Multiply position[d] by -1
+Set collisions[d] to true;
+ENDIF:
+IF: If collisions[d] is true
+RETURN: Direction correction
+Multiply direction[d] by -1
+RETURN: Speed correction / Friction
+Multiply speed[d] by 0.95
+Subtract 0.25 from speed[d]
+IF: If speed[d] < 0
+Set speed[d] to 0
+ENDIF:
+RETURN: Color change
+IF: If speed[d] isn't 0
+CALL: Call randomizeColors for color[r,g,b]
+ENDIF:
+ENDIF:
+ENDFOR:
+RETURN: Apply the changes
+Set the geometry of the squid to position[x,y], squidSize[x,y]
+Set the color of the squid to color[r,g,b]
+Show the BLed
