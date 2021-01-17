@@ -1,4 +1,6 @@
 # Squid documentation
+# Green rectangle demo:
+![screen-capture](https://user-images.githubusercontent.com/73352734/104853613-57a26800-5902-11eb-92e8-d49907fc1790.gif)
 # Warning: This is the branch for the Green Rectangle Task. This will NOT be updated, please go to the main branch if you want the newest version!
 ## Index:
 
