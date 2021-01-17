@@ -9,6 +9,8 @@
 #include "squid.h"
 #include <QMouseEvent>
 
+#include <QPainter>
+
 class Widget : public QWidget {
     Q_OBJECT
 
@@ -21,7 +23,8 @@ public:
     void mousePressEvent (QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
     int startpos[2];
-
+    void paintEvent(QPaintEvent*);
+    int rectX, rectY, rectW, rectH, rectDir;
 
 public slots:
     void updater();

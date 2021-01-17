@@ -1,4 +1,5 @@
 # Squid documentation
+# Warning: This is the branch for the Green Rectangle Task. This will NOT be updated, please go to the main branch if you want the newest version!
 ## Index:
 
 C++/Header files: 
