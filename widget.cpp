@@ -17,7 +17,7 @@ Widget::Widget(QWidget *parent) : QWidget(parent) {
     this->rectH = 50;
     this->rectX = this->width() / 2 - this->rectW;
     this->rectY = this->height() / 2 - this->rectH;
-    rectDir = 1;
+    this->rectDir = 1;
 
 }
 
