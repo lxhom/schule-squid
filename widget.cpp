@@ -1,8 +1,10 @@
+#include <QPixmap>
 #include "widget.h"
 #include <QMouseEvent>
 #include <QEvent>
 #include <iostream>
-#include <QPaintEvent>
+//#include <QPaintEvent>
+#include <QLabel>
 
 Widget::Widget(QWidget *parent) : QWidget(parent) {
     this->resize(500,500);
@@ -14,27 +16,38 @@ Widget::Widget(QWidget *parent) : QWidget(parent) {
     timer->start(16);
     startpos[0] = -99999;
     this->rectW = 100;
-    this->rectH = 50;
-    this->rectX = this->width() / 2 - this->rectW;
-    this->rectY = this->height() / 2 - this->rectH;
-    this->rectDir = 1;
-
+    QPixmap* image = new QPixmap(":/img/dvd.png");
+    scaledImage = image->scaledToWidth(this->rectW);
+    this->rectH = scaledImage.height();
+    this->rectX = rand()%(this->width()-rectW);
+    this->rectY = rand()%(this->height()-rectH);
+    this->rectDirX = 1;
+    this->rectDirY = -1;
+    this->color = new QColor(0, 255, 0);
+    label = new QLabel(this);
 }
-
 
 void Widget::paintEvent(QPaintEvent*) {
-    QPainter painter(this);
-    painter.fillRect(rectX, rectY, rectW, rectH, Qt::green);
+    QPainter painter(&scaledImage);
+    painter.setCompositionMode(QPainter::CompositionMode_SourceIn);
+    painter.fillRect(scaledImage.rect(), *color);
+    painter.end();
 }
 
-void Widget::updater() {
+void Widget::updater() {    
     for (int i=0; i<10; i++) {
         squids[i]->update();
     }
-    rectX+= 2 * rectDir;
-    if (rectX < 0) { rectX *= -1; rectDir *= -1; }
-    if (rectX > width() - rectW) { rectX = (width() - rectW) * 2 - rectX; rectDir *= -1; }
-    update();
+    bool col = false;
+    rectX+= 2 * rectDirX;
+    rectY+= 2 * rectDirY;
+    if (rectX < 0) { rectX *= -1; rectDirX *= -1; col = true; }
+    if (rectX > this->width() - rectW) { rectX = (this->width() - rectW) * 2 - rectX; rectDirX *= -1; col = true; }
+    if (rectY < 0) { rectY *= -1; rectDirY *= -1; col = true; }
+    if (rectY > this->height() - rectH) { rectY = (this->height() - rectH) * 2 - rectY; rectDirY *= -1; col = true; }
+    if (col) { color = new QColor(rand()%201+25,rand()%201+25,rand()%201+25);update();}
+    label->setPixmap(scaledImage);
+    label->setGeometry(rectX, rectY, rectW, rectH);
 
 
 

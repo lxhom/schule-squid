@@ -10,6 +10,7 @@
 #include <QMouseEvent>
 
 #include <QPainter>
+#include <QPixmap>
 
 class Widget : public QWidget {
     Q_OBJECT
@@ -24,7 +25,10 @@ public:
     void mouseReleaseEvent(QMouseEvent *event);
     int startpos[2];
     void paintEvent(QPaintEvent*);
-    int rectX, rectY, rectW, rectH, rectDir;
+    int rectX, rectY, rectW, rectH, rectDirX, rectDirY;
+    QColor* color;
+    QPixmap scaledImage;
+    QLabel* label;
 
 public slots:
     void updater();
