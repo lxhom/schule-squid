@@ -1,5 +1,6 @@
-# Squid documentation
-## Index:
+# Squid project
+## Docs:
+### Index:
 
 C++/Header files: 
 - [bild.h/cpp & bled.h/cpp](/docs/bild-bled.md)
