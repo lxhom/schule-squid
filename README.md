@@ -13,6 +13,10 @@ Other files:
 - [Squid.pro](/docs/pro.md)
 - [coffeedebug/CtoCS.coffe/js](/docs/coffeedebug.md)
 
+### Full Docs files:
+
+[Link](/docs/)
+
 ------
 
 ###### Last documented commit: [586d39](https://github.com/lxhom/schule-squid/586d39d3f7d4195aa4af83e099135960afb38788)
