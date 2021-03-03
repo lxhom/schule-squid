@@ -11,7 +11,7 @@ C++/Header files:
 Other files:
 - [Squid_win.pro.user & Squid.pro.user](/docs/prouser.md)
 - [Squid.pro](/docs/pro.md)
-- [coffeedebug/CtoCS.coffe/js](/docs/coffeedebug.md)
+- [coffeedebug/CtoCS.coffe/js](/docs/coffedebug.md)
 
 ### Full Docs files:
 
